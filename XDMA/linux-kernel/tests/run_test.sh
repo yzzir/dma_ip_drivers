@@ -65,7 +65,7 @@ testError=0
 if [ $isStreaming -eq 0 ]; then
 
   # Run the PCIe DMA memory mapped write read test
-  ./dma_memory_mapped_test.sh $transferSize $transferCount $h2cChannels $c2hChannels
+  $tool_path/dma_memory_mapped_test.sh $transferSize $transferCount $h2cChannels $c2hChannels
   returnVal=$?
   if [ $returnVal -eq 1 ]; then
     testError=1
@@ -76,7 +76,7 @@ else
   # Run the PCIe DMA streaming test
   channelPairs=$(($h2cChannels < $c2hChannels ? $h2cChannels : $c2hChannels))
   if [ $channelPairs -gt 0 ]; then
-    ./dma_streaming_test.sh $transferSize $transferCount $channelPairs
+    $tool_path/dma_streaming_test.sh $transferSize $transferCount $channelPairs
     returnVal=$?
     if [ $returnVal -eq 1 ]; then
       testError=1
